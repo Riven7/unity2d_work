@@ -15,7 +15,7 @@ TagManager:
   - 
   - 
   - Ground
-  - 
+  - Enemy
   - 
   - 
   - 
@@ -45,10 +45,10 @@ TagManager:
   - name: background
     uniqueID: 1482035791
     locked: 0
-  - name: for ground
+  - name: forground
     uniqueID: 2876499611
     locked: 0
-  - name: hero
+  - name: character
     uniqueID: 2083785943
     locked: 0
   - name: UI

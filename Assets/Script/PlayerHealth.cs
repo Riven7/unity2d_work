@@ -14,20 +14,23 @@ public class PlayerHealth : MonoBehaviour
     private Vector3 healthScale;    //血条缩放比例
     private PlayerControl playerControl;    //控制玩家受伤后不能跳
     private Rigidbody2D heroBody;     //碰到一起后给英雄施加力弹开
-    
+
+    private Animator deathAnim;
+
     private void Awake()
     {
         healthBar = GameObject.Find("HealthBar").GetComponent<SpriteRenderer>();
         heroBody = GetComponent<Rigidbody2D>();
         playerControl = GetComponent<PlayerControl>();
         healthScale = healthBar.transform.localScale;
+        deathAnim = GetComponent<Animator>();
     }
 
     void UpDateHealthBar()
     {
             //颜色从绿到红差值变化，血越少变化越大
         healthBar.material.color = Color.Lerp(Color.green, Color.red, 1 - health * 0.01f);
-        healthBar.transform.localScale = new Vector3(healthScale.x * health * 0.01f, 1, 1);
+        healthBar.transform.localScale = new Vector3(healthScale.x * health * 0.01f, healthScale.y, healthScale.z);
     }
    void TakeDamage(Transform EnemyTran)
     {
@@ -52,6 +55,7 @@ public class PlayerHealth : MonoBehaviour
                 }
                 if (health <= 0)
                 {
+                    deathAnim.SetTrigger("Death");
                     Collider2D[] colliders = GetComponents<Collider2D>();    //获取hero所有collision到数组中
                     foreach (Collider2D c in colliders)
                         c.isTrigger = true;     //for循环的另一种用法
