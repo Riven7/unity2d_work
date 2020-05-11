@@ -6,9 +6,12 @@ public class Rocket : MonoBehaviour
 {
     public GameObject explosion;
 
+    private Enemy enemys;
+
     void Start()
     {
         Destroy(gameObject, 2);
+        enemys = GameObject.Find("Enemy").GetComponent<Enemy>();
     }
     void OnExplode()
     {
@@ -22,5 +25,8 @@ public class Rocket : MonoBehaviour
             OnExplode();
             Destroy(gameObject);
         }
+
+        if (collision.tag == "Enemy")
+            enemys.Hurt();      //是否会导致场景中所有Enemy（包括未受炮弹的）都执行此函数？
     }
 }
