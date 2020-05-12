@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerHealth : MonoBehaviour
 {
-    private float health = 100f;
+    public float health = 100f;
     public float damageInterval = 0.35f;
     public float hurtForce = 100f;
     public float DamageAmount = 10;
@@ -26,7 +26,7 @@ public class PlayerHealth : MonoBehaviour
         deathAnim = GetComponent<Animator>();
     }
 
-    void UpDateHealthBar()
+    public void UpDateHealthBar()
     {
             //颜色从绿到红差值变化，血越少变化越大
         healthBar.material.color = Color.Lerp(Color.green, Color.red, 1 - health * 0.01f);

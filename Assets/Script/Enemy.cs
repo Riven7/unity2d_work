@@ -82,5 +82,6 @@ public class Enemy : MonoBehaviour
             //Quaternion.identity代表与原图一致，不旋转
             Instantiate(UI_100Points, ScorePos, Quaternion.identity);
         }
+        Destroy(gameObject);
     }
 }

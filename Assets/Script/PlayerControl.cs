@@ -59,6 +59,8 @@ public class PlayerControl : MonoBehaviour
         if (Input.GetButtonDown("Fire1"))
         {
             anim.SetTrigger("shoot");
+            //这种触发器是一次触发后就永远为true可执行动画了还是仅这一次动画可执行？
+            //答案是后者
         }
         grounded = Physics2D.Linecast(transform.position, groundCheck.position
                                         , 1 << LayerMask.NameToLayer("Ground"));

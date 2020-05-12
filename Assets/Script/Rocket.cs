@@ -11,7 +11,6 @@ public class Rocket : MonoBehaviour
     void Start()
     {
         Destroy(gameObject, 2);
-        enemys = GameObject.Find("Enemy").GetComponent<Enemy>();
     }
     void OnExplode()
     {
@@ -20,6 +19,7 @@ public class Rocket : MonoBehaviour
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        enemys = collision.GetComponent<Enemy>();
         if (collision.tag != "Player")
         {
             OnExplode();
@@ -27,6 +27,6 @@ public class Rocket : MonoBehaviour
         }
 
         if (collision.tag == "Enemy")
-            enemys.Hurt();      //是否会导致场景中所有Enemy（包括未受炮弹的）都执行此函数？
+            enemys.Hurt();     
     }
 }
