@@ -22,7 +22,7 @@ public class Enemy : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        frontCheck = transform.Find("frontCheck");
+        frontCheck = transform.Find("frontCheck").transform;
         ren = transform.Find("alienShip").GetComponent<SpriteRenderer>();
         enemyBody = GetComponent<Rigidbody2D>();
     }
@@ -55,7 +55,7 @@ public class Enemy : MonoBehaviour
             ren.sprite = hurtedEnemy;
         if (HP == 0 && !bDeath)
             Death();
-            //ren.sprite = deadEnemy;
+           // ren.sprite = deadEnemy;
     }
     void Death()
     {
@@ -65,8 +65,9 @@ public class Enemy : MonoBehaviour
         foreach (SpriteRenderer s in renders)
             s.enabled = false;
         ren.enabled = true; //感觉上面这四行都没必要?
-        if (deadEnemy != null)
+        if (deadEnemy != null && ren.enabled == true)
             ren.sprite = deadEnemy;
+         //Debug.Log(moveSpeed);
         //给怪物施加随机的旋转量
         //enemyBody.AddTorque(Random.Range(deathSpinMin, deathSpinMax));
 
@@ -82,6 +83,6 @@ public class Enemy : MonoBehaviour
             //Quaternion.identity代表与原图一致，不旋转
             Instantiate(UI_100Points, ScorePos, Quaternion.identity);
         }
-        Destroy(gameObject);
+        //Destroy(gameObject);
     }
 }

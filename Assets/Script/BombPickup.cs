@@ -8,11 +8,13 @@ public class BombPickup : MonoBehaviour
     private Animator anim;
     private bool landed = false; //false代表未着陆
     private PickupSpawner pickupSpawner;
+    private LayBombs layBombs;
 
     void Awake()
     {
         anim = transform.root.GetComponent<Animator>();
         pickupSpawner = GameObject.Find("pickupManager").GetComponent<PickupSpawner>();
+        layBombs = GameObject.FindGameObjectWithTag("Player").GetComponent<LayBombs>();
     }
 
     void OnTriggerEnter2D(Collider2D other)
@@ -20,12 +22,11 @@ public class BombPickup : MonoBehaviour
         //炸弹在空中被接住
         if (other.tag == "Player")
         {
-            //执行炸弹功能
-
             //销毁炮弹
             Destroy(transform.root.gameObject);
+            layBombs.bombCount++;
             //开启新协程
-            pickupSpawner.StartCoroutine(pickupSpawner.DeliverPickup());
+            //pickupSpawner.StartCoroutine(pickupSpawner.DeliverPickup());
         }
         //掉地上
         else if(other.tag == "ground" && !landed)

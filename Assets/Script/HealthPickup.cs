@@ -40,7 +40,7 @@ public class HealthPickup : MonoBehaviour
         else if (other.tag == "ground" && !landed)
         {
             anim.SetTrigger("Land");
-            transform.parent = null;
+            transform.parent = null;    //此时并没有销毁父物体
             gameObject.AddComponent<Rigidbody2D>();
             landed = true;
         }
