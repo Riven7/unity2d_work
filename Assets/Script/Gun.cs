@@ -9,14 +9,14 @@ public class Gun : MonoBehaviour
 
     private PlayerControl playerCtrl;   // 为了获取hero的朝向
 
-    private AudioSource audio;
+    private AudioSource audio1;     //使用audio会有warning，不懂
 
     // Start is called before the first frame update
     void Start()
     {
         //playerCtrl = GameObject.Find("hero").GetComponent<PlayerControl>();
         playerCtrl = transform.parent.GetComponent<PlayerControl>();    //找父类的组件
-        audio = GetComponent<AudioSource>(); //获取声音
+        audio1 = GetComponent<AudioSource>(); //获取声音
     }
 
     // Update is called once per frame
@@ -24,7 +24,7 @@ public class Gun : MonoBehaviour
     {
         if (Input.GetButtonDown("Fire1"))
         {
-            audio.Play();   //播放声音
+            audio1.Play();   //播放声音
             if (playerCtrl.faceRight)
             {
                 // 在position处实例化rocket， Quaternion.Euler new Vector3 控制旋转
