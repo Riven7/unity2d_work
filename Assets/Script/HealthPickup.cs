@@ -9,11 +9,14 @@ public class HealthPickup : MonoBehaviour
     private PickupSpawner pickupSpawner;
     private Animator anim;
     private bool landed = false;    //false代表未着陆
+    private AudioSource audio1;
 
     void Awake()
     {
         anim = transform.root.GetComponent<Animator>();
         pickupSpawner = GameObject.Find("pickupManager").GetComponent<PickupSpawner>();
+        // 捡到炸弹包的音源放在pickupManager上
+        audio1 = GameObject.Find("pickupManager").GetComponent<AudioSource>();
     }
 
     void OnTriggerEnter2D(Collider2D other)
@@ -21,6 +24,14 @@ public class HealthPickup : MonoBehaviour
         // 半空中被接着or在地上被英雄捡取后
         if (other.tag == "Player")
         {
+            if (audio1 != null)  //  播放捡到医疗包声音
+            {
+                if (!audio1.isPlaying)
+                {
+                    audio1.Play();
+                }
+            }
+
             PlayerHealth playerHealth = other.GetComponent<PlayerHealth>();
 
             playerHealth.health += healthBonus; //加血

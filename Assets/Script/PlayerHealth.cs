@@ -8,6 +8,7 @@ public class PlayerHealth : MonoBehaviour
     public float damageInterval = 0.35f;
     public float hurtForce = 100f;
     public float DamageAmount = 10;
+    public AudioClip[] hurtClips;
 
     private SpriteRenderer healthBar;   //血条的精灵渲染
     private float lastHurtTime;     //上次受伤时间
@@ -16,6 +17,7 @@ public class PlayerHealth : MonoBehaviour
     private Rigidbody2D heroBody;     //碰到一起后给英雄施加力弹开
 
     private Animator deathAnim;
+    private AudioSource audio1;
 
     private void Awake()
     {
@@ -24,6 +26,7 @@ public class PlayerHealth : MonoBehaviour
         playerControl = GetComponent<PlayerControl>();
         healthScale = healthBar.transform.localScale;
         deathAnim = GetComponent<Animator>();
+        audio1 = GetComponent<AudioSource>();
     }
 
     public void UpDateHealthBar()
@@ -66,6 +69,16 @@ public class PlayerHealth : MonoBehaviour
                     }
                     playerControl.enabled = false;  //让这两个脚本的功能失效
                     GetComponentInChildren<Gun>().enabled = false;
+                }
+                if (audio1 != null)  //  播放受伤减血声音
+                {
+                    if (!audio1.isPlaying)
+                    {
+                        int i = Random.Range(0, hurtClips.Length);
+                        audio1.clip = hurtClips[i];
+                        audio1.Play();
+                        //mixer.SetFloat("hero", 0);
+                    }
                 }
             }
         }

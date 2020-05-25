@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Audio;
 
 public class PlayerControl : MonoBehaviour
 {
@@ -16,10 +17,14 @@ public class PlayerControl : MonoBehaviour
     [HideInInspector]
     public bool grounded = false; //判断人物是否在地上
 
+    public AudioClip[] jumpClips;
+    public AudioMixer mixer;
+
     private Rigidbody2D heroBody;
     private Transform groundCheck;
 
     private Animator anim;
+    private AudioSource audio1;
 
     // Start is called before the first frame update
     void Start()
@@ -27,6 +32,7 @@ public class PlayerControl : MonoBehaviour
         heroBody = GetComponent<Rigidbody2D>();
         groundCheck = transform.Find("GroundCheck");//找到GroundCheck赋给变量
         anim = GetComponent<Animator>();
+        audio1 = GetComponent<AudioSource>();
     }
 
     private void FixedUpdate()
@@ -51,6 +57,17 @@ public class PlayerControl : MonoBehaviour
             anim.SetTrigger("Jump");
             heroBody.AddForce(new Vector2(0, jumpForce));//加力二维向量，水平0，垂直jumpForce（正值向上）
             jump = false; //不能再跳了   (力应该系统设置的有持续时间吧提供一小段就不提供了，可以维持一下运动)
+
+            if (audio1 != null)  //  播放跳跃声音
+            {
+                if (!audio1.isPlaying)
+                {
+                    int i = Random.Range(0, jumpClips.Length);
+                    audio1.clip = jumpClips[i];
+                    audio1.Play();
+                    mixer.SetFloat("hero", 0);
+                }
+            }
         }
     }
     // Update is called once per frame

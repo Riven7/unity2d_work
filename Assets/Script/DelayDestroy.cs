@@ -12,7 +12,7 @@ public class DelayDestroy : MonoBehaviour
     {
         if (destroyOnAwake)
         {
-            Destroy(gameObject, awakeDestroyDelay);
+            Destroy(gameObject, awakeDestroyDelay);// 销毁爆炸圆
         }
     }
 }

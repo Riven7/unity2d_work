@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 400000}
   - component: {fileID: 21200000}
   - component: {fileID: 5800000}
-  - component: {fileID: 6100000}
   - component: {fileID: 5000000}
   - component: {fileID: 2886842256089573720}
   - component: {fileID: -4316237151482647603}
@@ -103,32 +102,6 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0.02}
   serializedVersion: 2
   m_Radius: 1.26
---- !u!61 &6100000
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 100000}
-  m_Enabled: 0
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: -0.1, y: 0.22}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 2.56, y: 2.56}
-    newSize: {x: 1, y: 1}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 0.84, y: 0.58}
-  m_EdgeRadius: 0
 --- !u!50 &5000000
 Rigidbody2D:
   serializedVersion: 4
@@ -166,6 +139,9 @@ MonoBehaviour:
   bombForce: 100
   fuseTime: 1.5
   explosion: {fileID: 100000, guid: fd483194fd944a44c9341a88603445e7, type: 3}
+  boomClips:
+  - {fileID: 8300000, guid: 238da4efc08184aee919af254edb2ef1, type: 3}
+  - {fileID: 8300000, guid: 8b4e61c51941a46d1aac273472c814fd, type: 3}
 --- !u!114 &-4316237151482647603
 MonoBehaviour:
   m_ObjectHideFlags: 0
