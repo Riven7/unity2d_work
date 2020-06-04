@@ -1,45 +1,54 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerHealth : MonoBehaviour
 {
     public float health = 100f;
     public float damageInterval = 0.35f;
     public float hurtForce = 100f;
-    public float DamageAmount = 10;
+    public float DamageAmount = 10f;
     public AudioClip[] hurtClips;
+    public Image healthBar;
 
-    private SpriteRenderer healthBar;   //血条的精灵渲染
+    //private SpriteRenderer healthBar;   //血条的精灵渲染
     private float lastHurtTime;     //上次受伤时间
-    private Vector3 healthScale;    //血条缩放比例
+    //private Vector3 healthScale;    //血条缩放比例
     private PlayerControl playerControl;    //控制玩家受伤后不能跳
     private Rigidbody2D heroBody;     //碰到一起后给英雄施加力弹开
 
     private Animator deathAnim;
     private AudioSource audio1;
 
+    private ScoreRank getScore;
+
     private void Awake()
     {
-        healthBar = GameObject.Find("HealthBar").GetComponent<SpriteRenderer>();
+        //healthBar = GameObject.Find("HealthBar").GetComponent<SpriteRenderer>();
+        //healthBar = GameObject.FindGameObjectWithTag("healthBar").image;
         heroBody = GetComponent<Rigidbody2D>();
         playerControl = GetComponent<PlayerControl>();
-        healthScale = healthBar.transform.localScale;
+       // healthScale = healthBar.transform.localScale;
         deathAnim = GetComponent<Animator>();
         audio1 = GetComponent<AudioSource>();
+        getScore = GameObject.Find("Score").GetComponent<ScoreRank>();
     }
 
     public void UpDateHealthBar()
     {
             //颜色从绿到红差值变化，血越少变化越大
-        healthBar.material.color = Color.Lerp(Color.green, Color.red, 1 - health * 0.01f);
-        healthBar.transform.localScale = new Vector3(healthScale.x * health * 0.01f, healthScale.y, healthScale.z);
+        healthBar.color = Color.Lerp(Color.green, Color.red, 1 - health * 0.01f);
+        //0.10后必须加f,否则会报错，Cannot implicitly convert type 'double'to 'float'
+        healthBar.fillAmount = healthBar.fillAmount - 0.10f;
+        //healthBar.material.color = Color.Lerp(Color.green, Color.red, 1 - health * 0.01f);
+        // healthBar.transform.localScale = new Vector3(healthScale.x * health * 0.01f, healthScale.y, healthScale.z);
     }
    void TakeDamage(Transform EnemyTran)
     {
         playerControl.jump = false;
         //得到一个向量，再提供向上的向量Vector3.up = 1
-        Vector3 hurtVector3 = transform.position - EnemyTran.position + Vector3.up * 5f;
+        Vector3 hurtVector3 = transform.position - EnemyTran.position + Vector3.up * 3f;
         heroBody.AddForce(hurtForce * hurtVector3);
         health -= DamageAmount;
         UpDateHealthBar();
@@ -69,6 +78,7 @@ public class PlayerHealth : MonoBehaviour
                     }
                     playerControl.enabled = false;  //让这两个脚本的功能失效
                     GetComponentInChildren<Gun>().enabled = false;
+                    getScore.SaveData();
                 }
                 if (audio1 != null)  //  播放受伤减血声音
                 {

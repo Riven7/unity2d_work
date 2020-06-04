@@ -8,6 +8,8 @@ TagManager:
   - wall
   - BombPickup
   - ground
+  - ExplosionFX
+  - healthBar
   layers:
   - Default
   - TransparentFX
