@@ -11,8 +11,9 @@ public class AdjustVolume : MonoBehaviour
     //private AudioSource audio1;
 
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
+        Time.timeScale = 0;
         //audio1 = GetComponent<AudioSource>();
     }
 

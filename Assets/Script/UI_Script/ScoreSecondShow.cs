@@ -10,6 +10,7 @@ public class ScoreSecondShow : MonoBehaviour
     private void Awake()
     {
         second = GetComponent<Text>();
+        updateRank();
     }
 
     public void updateRank()

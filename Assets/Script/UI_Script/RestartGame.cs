@@ -7,6 +7,7 @@ using UnityEngine.SceneManagement;
 public class RestartGame : MonoBehaviour
 {
     private Button startGame;
+    //public GameObject panelMenu;
 
     private void Awake()
     {
@@ -16,5 +17,6 @@ public class RestartGame : MonoBehaviour
     public void OnBtnClick()
     {
         SceneManager.LoadScene(0);
+        //panelMenu.SetActive(true);
     }
 }

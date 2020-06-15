@@ -23,9 +23,13 @@ public class OpenPanel : MonoBehaviour
     public void OnBtnClick()
     {
         if (isOpen == false)
+        {
             DkPanel(panel.name);
+        }
         else
+        {
             ClosePanel(panel.name);
+        }
         isOpen = !isOpen;
     }
 

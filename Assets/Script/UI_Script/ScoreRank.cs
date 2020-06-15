@@ -4,12 +4,11 @@ using UnityEngine;
 
 public class ScoreRank : MonoBehaviour
 {
-    public int PlayerScore = 0;
+    public int PlayerScore;
 
     private void Awake()
     {
         PlayerScore = 0;
-
     }
 
     public void SaveData()
@@ -40,6 +39,9 @@ public class ScoreRank : MonoBehaviour
         PlayerPrefs.SetInt("第三名", sort[2]);
 
         Debug.Log(PlayerScore);
+        Debug.Log(sort[0]);
+        Debug.Log(sort[1]);
+        Debug.Log(sort[2]);
 
         PlayerScore = 0;
     }
