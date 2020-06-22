@@ -7,15 +7,16 @@ using UnityEngine.UI;
 public class MenuButton : MonoBehaviour
 {
     public GameObject panel;
-    public Button startGame;
-    public Button newGame;
+    public Button pause;
+    //public Button startGame;
+    //public Button newGame;想通过让某个按钮可否使用来控制在同一位置的两个按钮，但enable失败了
 
-    private Button btn;
+    //private Button btn;
     private bool isOpen;
 
     void Awake()
     {
-        btn = GetComponent<Button>();
+        //btn = GetComponent<Button>();不使用监听可不获取当前按钮
         isOpen = false;
     }
 
@@ -25,7 +26,8 @@ public class MenuButton : MonoBehaviour
         {
             Time.timeScale = 0;
             panel.SetActive(true);
-            startGame.enabled = false;
+            pause.gameObject.SetActive(true);
+            //startGame.enabled = false;
             //newGame.enabled = true;
         }
         else

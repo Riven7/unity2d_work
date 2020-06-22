@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Audio;
+using UnityEngine.EventSystems;
 
 public class PlayerControl : MonoBehaviour
 {
@@ -18,7 +19,7 @@ public class PlayerControl : MonoBehaviour
     public bool grounded = false; //判断人物是否在地上
 
     public AudioClip[] jumpClips;
-    public AudioMixer mixer;
+    //public AudioMixer mixer;
 
     private Rigidbody2D heroBody;
     private Transform groundCheck;
@@ -65,7 +66,7 @@ public class PlayerControl : MonoBehaviour
                     int i = Random.Range(0, jumpClips.Length);
                     audio1.clip = jumpClips[i];
                     audio1.Play();
-                    mixer.SetFloat("hero", 0);
+                    //mixer.SetFloat("hero", 0);
                 }
             }
         }
@@ -81,7 +82,7 @@ public class PlayerControl : MonoBehaviour
         }
         grounded = Physics2D.Linecast(transform.position, groundCheck.position
                                         , 1 << LayerMask.NameToLayer("Ground"));
-        if (Input.GetButtonDown("Jump") && grounded)
+        if (Input.GetButtonDown("Jump") && grounded && !EventSystem.current.IsPointerOverGameObject())
             jump = true;
     }
 

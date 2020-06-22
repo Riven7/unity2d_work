@@ -18,6 +18,7 @@ public class Enemy : MonoBehaviour
     private SpriteRenderer ren;         //负责更换对应的图片
     private Rigidbody2D enemyBody;      //敌人的2D刚体,控制其运动
     private bool bDeath = false;                //true敌人死亡
+
     private ScoreRank addScore;
 
     // Start is called before the first frame update
@@ -84,7 +85,7 @@ public class Enemy : MonoBehaviour
             ScorePos.y += 1.6f;
             //Quaternion.identity代表与原图一致，不旋转
             Instantiate(UI_100Points, ScorePos, Quaternion.identity);
-            addScore.PlayerScore += 100;
+            addScore.AddScore();
         }
         //Destroy(gameObject);
     }

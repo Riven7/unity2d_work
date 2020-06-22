@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class Gun : MonoBehaviour
 {
@@ -24,17 +25,24 @@ public class Gun : MonoBehaviour
     {
         if (Input.GetButtonDown("Fire1"))
         {
-            audio1.Play();   //播放声音
-            if (playerCtrl.faceRight)
+            //是为了触发按钮事件时不执行，按钮必须有navigation才行，不能为None
+           // EventSystem.current.currentSelectedGameObject == null
+
+            //判断当前事件是否在UGUI物体上面执行，是为true
+            if (!EventSystem.current.IsPointerOverGameObject())
             {
-                // 在position处实例化rocket， Quaternion.Euler new Vector3 控制旋转
-                Rigidbody2D bullet = Instantiate(rocket, transform.position, Quaternion.Euler(new Vector3(0, 0, 0)));
-                bullet.velocity = new Vector2(speed, 0);
-            }
-            else
-            {
-                Rigidbody2D bullet = Instantiate(rocket, transform.position, Quaternion.Euler(new Vector3(0, 0, 180)));
-                bullet.velocity = new Vector2(-speed, 0);       //z方向旋转180°
+                audio1.Play();   //播放声音
+                if (playerCtrl.faceRight)
+                {
+                    // 在position处实例化rocket， Quaternion.Euler new Vector3 控制旋转
+                    Rigidbody2D bullet = Instantiate(rocket, transform.position, Quaternion.Euler(new Vector3(0, 0, 0)));
+                    bullet.velocity = new Vector2(speed, 0);
+                }
+                else
+                {
+                    Rigidbody2D bullet = Instantiate(rocket, transform.position, Quaternion.Euler(new Vector3(0, 0, 180)));
+                    bullet.velocity = new Vector2(-speed, 0);       //z方向旋转180°
+                }
             }
         }
     }

@@ -6,17 +6,27 @@ using UnityEngine.SceneManagement;
 
 public class RestartGame : MonoBehaviour
 {
-    private Button startGame;
-    //public GameObject panelMenu;
+    public GameObject panelMenu;
+
+    //private Button startGame;
+    private bool start;
 
     private void Awake()
     {
-        startGame = GetComponent<Button>();
+        //startGame = GetComponent<Button>();
+        //startGame.onClick.AddListener(OnBtnClick);
+        start = false;
     }
 
     public void OnBtnClick()
     {
-        SceneManager.LoadScene(0);
-        //panelMenu.SetActive(true);
+        if (start == false)      //第一次开始游戏
+        {
+            panelMenu.SetActive(false);
+            Time.timeScale = 1;
+            start = true;
+        }
+        else
+            SceneManager.LoadScene(0);
     }
 }

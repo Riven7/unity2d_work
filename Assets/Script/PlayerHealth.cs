@@ -22,6 +22,8 @@ public class PlayerHealth : MonoBehaviour
     private AudioSource audio1;
 
     private ScoreRank getScore;
+    public GameObject overPanel;
+    public ScoreNow sumScore;
 
     private void Awake()
     {
@@ -78,7 +80,11 @@ public class PlayerHealth : MonoBehaviour
                     }
                     playerControl.enabled = false;  //让这两个脚本的功能失效
                     GetComponentInChildren<Gun>().enabled = false;
+
+                    overPanel.SetActive(true);
+                    sumScore.sumScore(getScore.PlayerScore);
                     getScore.SaveData();
+
                 }
                 if (audio1 != null)  //  播放受伤减血声音
                 {

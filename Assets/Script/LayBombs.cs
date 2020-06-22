@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class LayBombs : MonoBehaviour
 {
@@ -14,9 +15,12 @@ public class LayBombs : MonoBehaviour
     {
         if (Input.GetButtonDown("Fire2") && !bombLaid && bombCount > 0)
         {
-            bombCount--;
-            bombLaid = true;
-            Instantiate(bomb, transform.position, transform.rotation);
+            if (!EventSystem.current.IsPointerOverGameObject())
+            {
+                bombCount--;
+                bombLaid = true;
+                Instantiate(bomb, transform.position, transform.rotation);
+            }
         }
     }
 }

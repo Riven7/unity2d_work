@@ -5,12 +5,18 @@ using UnityEngine;
 public class ScoreRank : MonoBehaviour
 {
     public int PlayerScore;
+    public ScoreNow showScore;//prefab中不能添加UI控件，故将ui中的脚本放到非prefab中
 
     private void Awake()
     {
         PlayerScore = 0;
     }
 
+    public void AddScore()
+    {
+        PlayerScore += 100;
+        showScore.Show(PlayerScore);
+    }
     public void SaveData()
     {
         int[] sort = new int[4];

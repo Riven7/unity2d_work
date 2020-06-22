@@ -150,8 +150,14 @@ AudioMixerController:
   m_ExposedParameters:
   - guid: 86ea1c0bcb57b91488c0368f7dd785a1
     name: MasterVolume
+  - guid: eca043a028253534ba42c16a8173ac8b
+    name: boom
   - guid: fd02684ac9742f7458a7361f539e2fc9
     name: hero
+  - guid: e045c2015bd8db7489c655ddfe42cd06
+    name: Music_bk
+  - guid: 1a01d733e664e0d4d85f6dccca6d427f
+    name: prop
   m_AudioMixerGroupViews:
   - guids:
     - 5b31aebf390bff9409d63e485b8e714a
