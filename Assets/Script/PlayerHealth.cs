@@ -37,12 +37,12 @@ public class PlayerHealth : MonoBehaviour
         getScore = GameObject.Find("Score").GetComponent<ScoreRank>();
     }
 
-    public void UpDateHealthBar()
+    public void UpDateHealthBar(float count)
     {
             //颜色从绿到红差值变化，血越少变化越大
         healthBar.color = Color.Lerp(Color.green, Color.red, 1 - health * 0.01f);
         //0.10后必须加f,否则会报错，Cannot implicitly convert type 'double'to 'float'
-        healthBar.fillAmount = healthBar.fillAmount - 0.10f;
+        healthBar.fillAmount = healthBar.fillAmount + count;
         //healthBar.material.color = Color.Lerp(Color.green, Color.red, 1 - health * 0.01f);
         // healthBar.transform.localScale = new Vector3(healthScale.x * health * 0.01f, healthScale.y, healthScale.z);
     }
@@ -53,7 +53,7 @@ public class PlayerHealth : MonoBehaviour
         Vector3 hurtVector3 = transform.position - EnemyTran.position + Vector3.up * 3f;
         heroBody.AddForce(hurtForce * hurtVector3);
         health -= DamageAmount;
-        UpDateHealthBar();
+        UpDateHealthBar(-0.10f);
     }
 
     private void OnCollisionEnter2D(Collision2D collision)

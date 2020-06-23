@@ -9,6 +9,7 @@ public class Pause : MonoBehaviour
     //private bool isPause;
 
     public GameObject panel;
+    public Text scoreNow;   ////游戏中才显示当前积分
 
     private void Awake()
     {
@@ -24,6 +25,7 @@ public class Pause : MonoBehaviour
         //Time.timeScale = isPause ? 1 : 0;
         Time.timeScale = 1;
         //isPause = !isPause;
+        scoreNow.gameObject.SetActive(true);
     }
     
     /*private void OnDestroy()

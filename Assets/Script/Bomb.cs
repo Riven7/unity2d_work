@@ -59,7 +59,10 @@ public class Bomb : MonoBehaviour
             Rigidbody2D enemyBody = en.GetComponent<Rigidbody2D>();
             if (enemyBody != null && enemyBody.tag == "Enemy")
             {
-                enemyBody.gameObject.GetComponent<Enemy>().HP = 0;//让敌人死亡
+                if (en.GetComponent<Enemy>() == true)
+                    enemyBody.gameObject.GetComponent<Enemy>().HP = 0;//让敌人死亡
+                else if(en.GetComponent<Enemy2>() == true)
+                    enemyBody.gameObject.GetComponent<Enemy2>().HP = 0;//让敌人死亡
                 Vector3 deltaPos = enemyBody.transform.position - transform.position;
 
                 //normalized保持向量的方向不变，使其长度为1

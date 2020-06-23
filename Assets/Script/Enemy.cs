@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using System.Security.Cryptography;
 using UnityEngine;
@@ -64,17 +63,18 @@ public class Enemy : MonoBehaviour
     {
         bDeath = true;
 
-        SpriteRenderer[] renders = GetComponentsInChildren<SpriteRenderer>();
-        foreach (SpriteRenderer s in renders)
-            s.enabled = false;
-        ren.enabled = true; //感觉上面这四行都没必要?
+        //SpriteRenderer[] renders = GetComponentsInChildren<SpriteRenderer>();
+        //foreach (SpriteRenderer s in renders)
+        //    s.enabled = false;
+        //ren.enabled = true; //感觉上面这四行都没必要?
         if (deadEnemy != null && ren.enabled == true)
             ren.sprite = deadEnemy;
-         //Debug.Log(moveSpeed);
-        //给怪物施加随机的旋转量
-        //enemyBody.AddTorque(Random.Range(deathSpinMin, deathSpinMax));
+        //Debug.Log(moveSpeed);
+        enemyBody.AddTorque(Random.Range(deathSpinMin, deathSpinMax));
+       //给怪物施加随机的旋转量
+       //enemyBody.AddTorque(Random.Range(deathSpinMin, deathSpinMax));
 
-        Collider2D[] colliders = GetComponents<Collider2D>();
+       Collider2D[] colliders = GetComponents<Collider2D>();
         foreach (Collider2D c in colliders)
             c.isTrigger = true;
 

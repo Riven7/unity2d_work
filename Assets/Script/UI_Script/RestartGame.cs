@@ -8,6 +8,8 @@ public class RestartGame : MonoBehaviour
 {
     public GameObject panelMenu;
 
+    public Text scoreNow;   //开始游戏后显示当前积分
+
     //private Button startGame;
     private bool start;
 
@@ -24,6 +26,7 @@ public class RestartGame : MonoBehaviour
         {
             panelMenu.SetActive(false);
             Time.timeScale = 1;
+            scoreNow.gameObject.SetActive(true);
             start = true;
         }
         else

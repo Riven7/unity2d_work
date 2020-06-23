@@ -39,7 +39,7 @@ public class HealthPickup : MonoBehaviour
                 playerHealth.health = 100;
 
             //更新血条
-            playerHealth.UpDateHealthBar();
+            playerHealth.UpDateHealthBar(0.10f);
 
             //开启新协程
             pickupSpawner.StartCoroutine(pickupSpawner.DeliverPickup());

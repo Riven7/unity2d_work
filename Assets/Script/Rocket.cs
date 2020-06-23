@@ -6,7 +6,8 @@ public class Rocket : MonoBehaviour
 {
     public GameObject explosion;
 
-    private Enemy enemys;
+    private Enemy enemy;
+    private Enemy2 enemy2;
 
     void Start()
     {
@@ -19,7 +20,6 @@ public class Rocket : MonoBehaviour
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        enemys = collision.GetComponent<Enemy>();
         if (collision.tag != "Player")
         {
             OnExplode();
@@ -27,6 +27,22 @@ public class Rocket : MonoBehaviour
         }
 
         if (collision.tag == "Enemy")
-            enemys.Hurt();     
+        {
+            //enemys = collision.GetComponent<Enemy>();
+            //enemys.Hurt();
+
+            //if (collision.GetComponent<Enemy>() == true)也正确
+            if (enemy = collision.gameObject.GetComponent<Enemy>())
+            {
+                //enemy = collision.GetComponent<Enemy>();
+                enemy.Hurt();
+            }
+            //else if (collision.GetComponent<Enemy2>() == true)也正确
+            else if (enemy2 = collision.GetComponent<Enemy2>())
+            {
+                //enemy2 = collision.GetComponent<Enemy2>();
+                enemy2.Hurt();
+            }
+        }     
     }
 }

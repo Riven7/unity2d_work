@@ -7,8 +7,9 @@ public class Spawner : MonoBehaviour
     public float spawnTime = 3f;
     public float spawnDelay = 3f;
     public GameObject enemy;
-    public float dropRangeLeft = -15f;       //最左侧
-    public float dropRangeRight = 15f;       // 最右侧
+    public GameObject enemy2;
+    public float dropRangeLeft = -13f;       //最左侧
+    public float dropRangeRight = 14f;       // 最右侧
 
     // Start is called before the first frame update
     void Start()
@@ -21,7 +22,12 @@ public class Spawner : MonoBehaviour
     {
         // 在最左和最右之间产生随机x值
         float dropPosX = Random.Range(dropRangeLeft, dropRangeRight);
+        int who = Random.Range(1, 3);
+
         Vector3 dropPos = new Vector3(dropPosX, 15f, 1f);
-        Instantiate(enemy, dropPos, transform.rotation);
+        if (who == 1)
+            Instantiate(enemy2, dropPos, transform.rotation);
+        else
+            Instantiate(enemy, dropPos, transform.rotation);
     }
 }

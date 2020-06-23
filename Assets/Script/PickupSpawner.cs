@@ -6,8 +6,8 @@ public class PickupSpawner : MonoBehaviour
 {
     public GameObject[] pickups;            // 道具数组：炸弹、医疗包
     public float pickupDeliveryTime = 4f;   //产生每种道具间隔时间
-    public float dropRangeLeft = -15f;       //最左侧
-    public float dropRangeRight = 15f;       // 最右侧
+    public float dropRangeLeft = -8f;       //最左侧
+    public float dropRangeRight = 18f;       // 最右侧
     public float highHealthThreshold = 80f; // 血量大于多少时只产生炸弹包
     public float lowHealthThreshold = 20f;	// 血量低于多少时只产生医疗包
 
