@@ -151,7 +151,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bec7e74eab1c5cc4c83cd8427be15302, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 15
+  moveSpeed: 17
   HP: 1
   deadEnemy: {fileID: 21300000, guid: bd1989b4e42a0454097f657dfb368bd8, type: 3}
   UI_100Points: {fileID: 2940599188096308789, guid: 273582349ef820d4599f22720671017c,

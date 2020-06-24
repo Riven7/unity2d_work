@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Enemy2 : MonoBehaviour
 {
-    public float moveSpeed = 15f;
+    public float moveSpeed = 17f;
     public int HP = 1;
     public Sprite deadEnemy;            //死亡后的图片
     public GameObject UI_100Points;     //怪物死亡后的得分
