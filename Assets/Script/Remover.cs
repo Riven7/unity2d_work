@@ -32,6 +32,7 @@ public class Remover : MonoBehaviour
                 if (subHealth.health > 0)
                 {
                     subHealth.health -= 10f;
+                    subHealth.AudioPlay();
                     subHealth.UpDateHealthBar(-0.10f);
                     Debug.Log("sub10");
                 }

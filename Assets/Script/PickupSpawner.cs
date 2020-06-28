@@ -9,7 +9,7 @@ public class PickupSpawner : MonoBehaviour
     public float dropRangeLeft = -8f;       //最左侧
     public float dropRangeRight = 18f;       // 最右侧
     public float highHealthThreshold = 80f; // 血量大于多少时只产生炸弹包
-    public float lowHealthThreshold = 20f;	// 血量低于多少时只产生医疗包
+    public float lowHealthThreshold = 30f;	// 血量低于多少时只产生医疗包
 
     private PlayerHealth playerHealth;
 

@@ -15,7 +15,7 @@ public class CameraFollow : MonoBehaviour
     public Vector2 maxXAndY;
     public Vector2 minXAndY;//二维向量.x and .y
 
-    public Transform player;
+    private Transform player;
 
     void Awake()
     {

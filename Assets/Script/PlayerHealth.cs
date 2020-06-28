@@ -20,10 +20,12 @@ public class PlayerHealth : MonoBehaviour
 
     private Animator deathAnim;
     private AudioSource audio1;
+    private bool dead = false;
 
     private ScoreRank getScore;
     public GameObject overPanel;
     public ScoreNow sumScore;
+    public ShowText healthText;
 
     private void Awake()
     {
@@ -31,7 +33,7 @@ public class PlayerHealth : MonoBehaviour
         //healthBar = GameObject.FindGameObjectWithTag("healthBar").image;
         heroBody = GetComponent<Rigidbody2D>();
         playerControl = GetComponent<PlayerControl>();
-       // healthScale = healthBar.transform.localScale;
+        // healthScale = healthBar.transform.localScale;
         deathAnim = GetComponent<Animator>();
         audio1 = GetComponent<AudioSource>();
         getScore = GameObject.Find("Score").GetComponent<ScoreRank>();
@@ -39,13 +41,29 @@ public class PlayerHealth : MonoBehaviour
 
     public void UpDateHealthBar(float count)
     {
-            //颜色从绿到红差值变化，血越少变化越大
+        //颜色从绿到红差值变化，血越少变化越大
         healthBar.color = Color.Lerp(Color.green, Color.red, 1 - health * 0.01f);
         //0.10后必须加f,否则会报错，Cannot implicitly convert type 'double'to 'float'
         healthBar.fillAmount = healthBar.fillAmount + count;
         //healthBar.material.color = Color.Lerp(Color.green, Color.red, 1 - health * 0.01f);
         // healthBar.transform.localScale = new Vector3(healthScale.x * health * 0.01f, healthScale.y, healthScale.z);
 
+        if (dead == false)
+            healthText.ShowFloat(health);
+    }
+    void TakeDamage(Transform EnemyTran)
+    {
+        playerControl.jump = false;
+        //得到一个向量，再提供向上的向量Vector3.up = 1
+        Vector3 hurtVector3 = transform.position - EnemyTran.position + Vector3.up * 2f;
+        heroBody.AddForce(hurtForce * hurtVector3);
+        health -= DamageAmount;
+        AudioPlay();
+        UpDateHealthBar(-0.10f);
+    }
+
+    public void AudioPlay()
+    {
         if (audio1 != null)  //  播放受伤减血声音
         {
             if (!audio1.isPlaying)
@@ -57,15 +75,6 @@ public class PlayerHealth : MonoBehaviour
             }
         }
     }
-   void TakeDamage(Transform EnemyTran)
-    {
-        playerControl.jump = false;
-        //得到一个向量，再提供向上的向量Vector3.up = 1
-        Vector3 hurtVector3 = transform.position - EnemyTran.position + Vector3.up * 3f;
-        heroBody.AddForce(hurtForce * hurtVector3);
-        health -= DamageAmount;
-        UpDateHealthBar(-0.10f);
-    }
 
     public void GameOver()
     {
@@ -76,19 +85,23 @@ public class PlayerHealth : MonoBehaviour
 
     public void Death()
     {
-        deathAnim.SetTrigger("Death");
-        Collider2D[] colliders = GetComponents<Collider2D>();    //获取hero所有collision到数组中
-        foreach (Collider2D c in colliders)
-            c.isTrigger = true;     //for循环的另一种用法
-        SpriteRenderer[] sprites = GetComponentsInChildren<SpriteRenderer>();  //为了把英雄的所有部位的层放在最前面
-        for (int i = 0; i < sprites.Length; i++)
+        if (dead == false)
         {
-            sprites[i].sortingLayerName = "UI";
+            deathAnim.SetTrigger("Death");
+            Collider2D[] colliders = GetComponents<Collider2D>();    //获取hero所有collision到数组中
+            foreach (Collider2D c in colliders)
+                c.isTrigger = true;     //for循环的另一种用法
+            SpriteRenderer[] sprites = GetComponentsInChildren<SpriteRenderer>();  //为了把英雄的所有部位的层放在最前面
+            for (int i = 0; i < sprites.Length; i++)
+            {
+                sprites[i].sortingLayerName = "UI";
+            }
+            playerControl.enabled = false;  //让这两个脚本的功能失效
+            GetComponentInChildren<Gun>().enabled = false;
+            dead = true;
         }
-        playerControl.enabled = false;  //让这两个脚本的功能失效
-        GetComponentInChildren<Gun>().enabled = false;
     }
- 
+
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.tag == "Enemy")

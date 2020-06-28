@@ -10,7 +10,7 @@ public class Bomb : MonoBehaviour
     public GameObject explosion;    // 爆炸背景圆
     public AudioClip[] boomClips;
 
-    private LayBombs layBombs;              //放置炸弹脚本
+    //private LayBombs layBombs;              //放置炸弹脚本
     private PickupSpawner pickupSpawner;    // 道具生成脚本，启动新协程用
     private ParticleSystem explosionFX;     // 爆炸粒子效果
     private AudioSource audio1;
@@ -20,14 +20,14 @@ public class Bomb : MonoBehaviour
     {
         explosionFX = GameObject.FindGameObjectWithTag("ExplosionFX").GetComponent<ParticleSystem>();
         pickupSpawner = GameObject.Find("pickupManager").GetComponent<PickupSpawner>();
-        layBombs = GameObject.FindGameObjectWithTag("Player").GetComponent<LayBombs>();
+        //layBombs = GameObject.FindGameObjectWithTag("Player").GetComponent<LayBombs>();
         audio1 = GameObject.Find("forground").GetComponent<AudioSource>();
         audio2 = GameObject.Find("explosionParticle").GetComponent<AudioSource>();
     }
     // Start is called before the first frame update
     void Start()
     {
-        if (transform.root == transform)    //没有降落伞
+        if (transform.root == transform && gameObject.tag != "BombPickup")    //没有降落伞
 
             StartCoroutine(BombDetonation());
     }
@@ -61,7 +61,7 @@ public class Bomb : MonoBehaviour
             {
                 if (en.GetComponent<Enemy>() == true)
                     enemyBody.gameObject.GetComponent<Enemy>().HP = 0;//让敌人死亡
-                else if(en.GetComponent<Enemy2>() == true)
+                else if (en.GetComponent<Enemy2>() == true)
                     enemyBody.gameObject.GetComponent<Enemy2>().HP = 0;//让敌人死亡
                 Vector3 deltaPos = enemyBody.transform.position - transform.position;
 
@@ -87,7 +87,7 @@ public class Bomb : MonoBehaviour
         // 实列化爆炸背景圆
         Instantiate(explosion, transform.position, Quaternion.identity);
 
-        layBombs.bombLaid = false; // Hero可再次释放Bomb
+        //layBombs.bombLaid = false; // Hero可再次释放Bomb
         // 销毁Bomb
         Destroy(transform.gameObject);
     }

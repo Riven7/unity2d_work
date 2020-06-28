@@ -35,11 +35,12 @@ public class BombPickup : MonoBehaviour
             //销毁炮弹
             Destroy(transform.root.gameObject);
             layBombs.bombCount++;
+            layBombs.Show();
             //开启新协程
             //pickupSpawner.StartCoroutine(pickupSpawner.DeliverPickup());
         }
         //掉地上
-        else if(other.tag == "ground" && !landed)
+        else if (other.tag == "ground" && !landed)
         {
             anim.SetTrigger("Land");
             transform.parent = null;

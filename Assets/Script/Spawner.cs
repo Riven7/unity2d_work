@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class Spawner : MonoBehaviour
 {
-    public float spawnTime = 3f;
-    public float spawnDelay = 3f;
+    public float spawnTime = 2f;
+    public float spawnDelay = 1f;
     public GameObject enemy;
     public GameObject enemy2;
     public float dropRangeLeft = -13f;       //最左侧
